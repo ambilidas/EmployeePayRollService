@@ -13,13 +13,13 @@ namespace EmployeePayRollService
         public long Salary { get; set; } 
         public DateTime StartDate { get; set; }
         public string Gender { get; set; }
-        public string EmpPhone { get; set; }
+        public long EmpPhone { get; set; }
         public string EmpAddress { get; set; }
         public string Department { get; set; }
         public long BasicPay { get; set; }
-        public long Deductions { get; set; }
-        public long TaxablePay { get; set; }
-        public long IncomeTax { get; set; }
+        public double Deductions { get; set; }
+        public double TaxablePay { get; set; }
+        public double IncomeTax { get; set; }
         public long NetPay { get; set; }
 
     }
