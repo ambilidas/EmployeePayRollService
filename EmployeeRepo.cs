@@ -124,5 +124,58 @@ namespace EmployeePayRollService
             }
 
         }
+        public void GetEmpJoinedInParticularDateRange()
+        {
+            try
+            {
+                EmployeeModel model = new EmployeeModel();
+                using (this.connection)
+                {
+                    string query = @"select * FROM employee_payroll where startDate between CAST('2021-07-11' AS DATE) AND GETDATE()";
+                    SqlCommand cmd = new SqlCommand(query, connection);
+                    connection.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    //check if there are records
+                    if (reader.HasRows)
+                    {
+                        Console.WriteLine("Employee Records who joined in particular date range");
+                        Console.WriteLine("---------------------------------------------------------");
+                        while (reader.Read())
+                        {
+                            model.EmployeeId = reader.GetInt32(0);
+                            model.EmployeeName = reader.GetString(1);
+                            model.Salary = reader.GetInt64(2);
+                            model.StartDate = reader.GetDateTime(3);
+                            model.Gender = reader.GetString(4);
+                            model.EmpPhone = reader.GetInt64(5);
+                            model.EmpAddress = reader.GetString(6);
+                            model.Department = reader.GetString(7);
+                            model.BasicPay = reader.GetInt64(8);
+                            model.Deductions = reader.GetDouble(9);
+                            model.TaxablePay = reader.GetDouble(10);
+                            model.IncomeTax = reader.GetDouble(11);
+                            model.NetPay = reader.GetInt64(12);
+
+                            //display retrived records
+
+                            Console.WriteLine("Employee name:"+model.EmployeeName+" Salary:"+ model.Salary+" Department:"+ model.Department+" Phone num:"+ model.EmpPhone+" Address:"+ model.EmpAddress+" Deductions:"+ model.Deductions+" Basic pay:"+ model.BasicPay);
+                            Console.WriteLine("\n");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No records found");
+                    }
+                    reader.Close();
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        
     }
 }

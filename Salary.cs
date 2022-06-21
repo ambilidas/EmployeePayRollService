@@ -18,6 +18,7 @@ namespace EmployeePayRollService
         {
             SqlConnection SalaryConnection = ConnectionSetUp();
             long salary = 0;
+
             try
             {
                 using (SalaryConnection)
@@ -25,6 +26,9 @@ namespace EmployeePayRollService
                     SalaryDetailModel displayModel = new SalaryDetailModel();
                     //SalaryUpdateModel salaryUpdateModelobj= new SalaryUpdateModel();
                     SalaryUpdateModel UpdateModel = new SalaryUpdateModel();
+                    UpdateModel.EmployeeId = 6;
+                    UpdateModel.Salary = 60000;
+                    UpdateModel.EmployeeName = "Terissa";
                   
                     //Define sql command object
                     SqlCommand cmd = new SqlCommand("spUpdateEmployeeSalary",SalaryConnection);
